@@ -1,2 +1,6 @@
 # API key from Alpha Vantage
 config.py
+
+# Pycache
+__pycache__/
+.config.cpython-39.pyc

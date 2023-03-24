@@ -7,5 +7,8 @@ df = pd.read_csv("")
 
 print(df)
 
-plt.plot(df["netIncome"])
+for col in df.columns:
+    print(col)
+
+plt.plot(df[""])
 plt.show()

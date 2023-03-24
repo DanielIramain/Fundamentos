@@ -1,12 +1,20 @@
 import config
 import time
 from tqdm import tqdm
-import matplotlib.pyplot as plt
 from alpha_vantage.fundamentaldata import FundamentalData
 
 ## Variables globales
 
+contador_inputs = 0
+tickers = []
+
+while contador_inputs <= 3:
+    data_input = input("Introduce el ticker del cual deseas obtener información: ")
+    tickers.append(data_input)
+    contador_inputs += 1
+
 cases_to_names = {
+    'overview': 'company overview',
     'q_BS': 'quarterly_balance_sheet',
     'q_IS': 'quarterly_income_statement',
     'q_CF': 'quarterly_cash_flow',
@@ -15,7 +23,6 @@ cases_to_names = {
     'a_CF': 'annual_cash_flow'
 }
 data_dir = ''
-tickers = ['META', 'CEPU', 'IBM']
 
 def fundamental_api_call(case: str, ticker: str, fd):
     '''
@@ -34,7 +41,9 @@ def fundamental_api_call(case: str, ticker: str, fd):
     None
     '''
 
-    if case == 'a_IS':
+    if case == 'overview':
+       data = fd.get_company_overview(ticker)
+    elif case == 'a_IS':
         data = fd.get_income_statement_annual(ticker)
     elif case == 'a_BS':
         data = fd.get_balance_sheet_annual(ticker)
